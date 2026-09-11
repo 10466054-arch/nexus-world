@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚡ NEXUS WORLD</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050816;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* FONDO */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(circle at 20% 20%,rgba(0,200,255,.18),transparent 30%),
+        radial-gradient(circle at 80% 70%,rgba(150,0,255,.18),transparent 30%),
+        linear-gradient(135deg,#030512,#0b1029,#050816);
+    z-index:-3;
+}
+
+.stars{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    overflow:hidden;
+}
+
+.star{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{opacity:.15;transform:scale(.6)}
+    to{opacity:1;transform:scale(1.4)}
+}
+
+/* NAVBAR */
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:18px 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:rgba(3,5,18,.72);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    z-index:100;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:#00d9ff;
+}
+
+nav ul{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
+
+nav a{
+    color:#ddd;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#00eaff;
+}
+
+.menu-btn{
+    display:none;
+    font-size:28px;
+    cursor:pointer;
+}
+
+/* HERO */
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:120px 20px 60px;
+    position:relative;
+}
+
+.hero-content{
+    max-width:900px;
+}
+
+.badge{
+    display:inline-block;
+    padding:9px 18px;
+    border:1px solid rgba(0,220,255,.5);
+    border-radius:30px;
+    color:#00eaff;
+    background:rgba(0,220,255,.08);
+    margin-bottom:25px;
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    50%{box-shadow:0 0 30px rgba(0,220,255,.3)}
+}
+
+h1{
+    font-size:clamp(55px,10vw,120px);
+    line-height:.9;
+    font-weight:1000;
+    text-transform:uppercase;
+    background:linear-gradient(90deg,#fff,#00eaff,#9b4dff,#fff);
+    background-size:300%;
+    -webkit-background-clip:text;
+    color:transparent;
+    animation:gradient 5s linear infinite;
+}
+
+@keyframes gradient{
+    to{background-position:300%}
+}
+
+.hero p{
+    margin:30px auto;
+    max-width:650px;
+    color:#b7bfd8;
+    font-size:19px;
+    line-height:1.7;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:none;
+    padding:16px 30px;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:900;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.primary{
+    background:#00d9ff;
+    color:#001018;
+    box-shadow:0 0 30px rgba(0,217,255,.35);
+}
+
+.secondary{
+    background:rgba(255,255,255,.06);
+    color:white;
+    border:1px solid rgba(255,255,255,.15);
+}
+
+.btn:hover{
+    transform:translateY(-5px) scale(1.03);
+}
+
+/* ORBE */
+.orb{
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background:radial-gradient(circle,#00eaff,#124bff 35%,transparent 70%);
+    filter:blur(2px);
+    opacity:.25;
+    animation:float 6s ease-in-out infinite;
+    z-index:-1;
+}
+
+.orb.one{
+    left:-100px;
+    top:25%;
+}
+
+.orb.two{
+    right:-100px;
+    bottom:15%;
+    animation-delay:2s;
+}
+
+@keyframes float{
+    50%{transform:translateY(-35px) scale(1.1)}
+}
+
+/* SECCIONES */
+section{
+    padding:100px 7%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.section-title h2{
+    font-size:45px;
+    margin-bottom:10px;
+}
+
+.section-title p{
+    color:#8993ae;
+}
+
+/* TARJETAS */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.card{
+    padding:35px;
+    min-height:280px;
+    background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025));
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:25px;
+    backdrop-filter:blur(10px);
+    transition:.4s;
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    background:#00d9ff;
+    filter:blur(80px);
+    opacity:.15;
+    right:-70px;
+    top:-70px;
+}
+
+.card:hover{
+    transform:translateY(-12px);
+    border-color:rgba(0,220,255,.5);
+    box-shadow:0 20px 50px rgba(0,0,0,.4);
+}
+
+.icon{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.card h3{
+    font-size:25px;
+    margin-bottom:12px;
+}
+
+.card p{
+    color:#929bb4;
+    line-height:1.7;
+}
+
+/* ESTADÍSTICAS */
+.stats{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.stat{
+    text-align:center;
+    padding:30px 10px;
+    border-radius:20px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.stat strong{
+    display:block;
+    font-size:42px;
+    color:#00eaff;
+}
+
+.stat span{
+    color:#8993ae;
+}
+
+/* CTA */
+.cta{
+    max-width:1000px;
+    margin:auto;
+    text-align:center;
+    padding:70px 30px;
+    border-radius:30px;
+    background:
+        linear-gradient(135deg,rgba(0,217,255,.12),rgba(140,50,255,.12));
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.cta h2{
+    font-size:45px;
+    margin-bottom:20px;
+}
+
+.cta p{
+    color:#9da6bd;
+    margin-bottom:30px;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:40px 20px;
+    border-top:1px solid rgba(255,255,255,.08);
+    color:#68718b;
+}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(8px);
+    z-index:500;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal-box{
+    max-width:500px;
+    width:100%;
+    background:#0c1126;
+    border:1px solid rgba(0,220,255,.4);
+    border-radius:25px;
+    padding:40px;
+    text-align:center;
+    box-shadow:0 0 70px rgba(0,220,255,.15);
+}
+
+.modal-box h2{
+    margin-bottom:15px;
+}
+
+.modal-box p{
+    color:#9ca5bd;
+    line-height:1.6;
+    margin-bottom:25px;
+}
+
+.close{
+    background:#ff4f7b;
+    color:white;
+}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+
+    nav ul{
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        background:#06091a;
+        flex-direction:column;
+        align-items:center;
+        padding:25px;
+        display:none;
+    }
+
+    nav ul.active{
+        display:flex;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .section-title h2,
+    .cta h2{
+        font-size:35px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<nav>
+    <div class="logo">NEXUS<span>⚡</span></div>
+
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+    <ul id="menu">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#mundo">Mundo</a></li>
+        <li><a href="#poderes">Poderes</a></li>
+        <li><a href="#jugar">Jugar</a></li>
+    </ul>
+</nav>
+
+<main>
+
+<section class="hero" id="inicio">
+
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+
+    <div class="hero-content">
+
+        <div class="badge">🚀 EL FUTURO COMIENZA AQUÍ</div>
+
+        <h1>NEXUS<br>WORLD</h1>
+
+        <p>
+            Explora un universo lleno de misterios, poderes,
+            mundos increíbles y desafíos. ¿Estás preparado para
+            entrar en una nueva aventura?
+        </p>
+
+        <div class="buttons">
+            <button class="btn primary" onclick="openGame()">
+                ▶ JUGAR AHORA
+            </button>
+
+            <button class="btn secondary" onclick="scrollToWorld()">
+                🌎 EXPLORAR
+            </button>
+        </div>
+
+    </div>
+</section>
+
+
+<section id="mundo">
+
+    <div class="section-title">
+        <h2>🌌 UN MUNDO ENORME</h2>
+        <p>Descubre todo lo que puedes encontrar.</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="icon">🏔️</div>
+            <h3>Montañas</h3>
+            <p>
+                Viaja por enormes montañas, lugares ocultos
+                y zonas misteriosas esperando ser descubiertas.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🌋</div>
+            <h3>Zona Volcánica</h3>
+            <p>
+                Una región peligrosa llena de lava,
+                secretos y desafíos especiales.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🏙️</div>
+            <h3>Ciudad Nexus</h3>
+            <p>
+                El centro del universo. Aquí encontrarás
+                tiendas, personajes y nuevas misiones.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<section id="poderes">
+
+    <div class="section-title">
+        <h2>⚡ PODERES</h2>
+        <p>Elige tu estilo de aventura.</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="icon">🔥</div>
+            <h3>Fuego</h3>
+            <p>
+                Controla una energía ardiente capaz de
+                atravesar los desafíos más difíciles.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">❄️</div>
+            <h3>Hielo</h3>
+            <p>
+                Congela obstáculos y utiliza el poder
+                del hielo para explorar nuevas zonas.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">⚡</div>
+            <h3>Rayo</h3>
+            <p>
+                Muévete rápidamente utilizando energía
+                eléctrica y supera los retos.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<section>
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong>100+</strong>
+            <span>Misiones</span>
+        </div>
+
+        <div class="stat">
+            <strong>50+</strong>
+            <span>Zonas</span>
+        </div>
+
+        <div class="stat">
+            <strong>30+</strong>
+            <span>Poderes</span>
+        </div>
+
+        <div class="stat">
+            <strong>∞</strong>
+            <span>Aventura</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="jugar">
+
+    <div class="cta">
+
+        <h2>¿ESTÁS LISTO? ⚡</h2>
+
+        <p>
+            El universo Nexus te está esperando.
+            Entra y comienza tu aventura.
+        </p>
+
+        <button class="btn primary" onclick="openGame()">
+            🚀 ENTRAR AL MUNDO
+        </button>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+    © 2026 NEXUS WORLD — Página creada en HTML, CSS y JavaScript.
+</footer>
+
+
+<!-- VENTANA -->
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <h2>🚀 ¡BIENVENIDO A NEXUS!</h2>
+
+        <p>
+            Esta es una demostración de la página.
+            El siguiente paso podría ser convertirla
+            en un juego completo con personajes,
+            mapas, enemigos y misiones.
+        </p>
+
+        <button class="btn close" onclick="closeGame()">
+            CERRAR
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* CREAR ESTRELLAS */
+const stars = document.getElementById("stars");
+
+for(let i=0;i<120;i++){
+
+    const star = document.createElement("div");
+
+    star.className = "star";
+
+    star.style.left = Math.random()*100 + "%";
+    star.style.top = Math.random()*100 + "%";
+
+    star.style.animationDelay =
+        Math.random()*2 + "s";
+
+    star.style.opacity =
+        Math.random();
+
+    stars.appendChild(star);
+}
+
+
+/* MENÚ */
+function toggleMenu(){
+
+    document
+        .getElementById("menu")
+        .classList.toggle("active");
+
+}
+
+
+/* ABRIR MODAL */
+function openGame(){
+
+    document
+        .getElementById("modal")
+        .style.display = "flex";
+
+}
+
+
+/* CERRAR MODAL */
+function closeGame(){
+
+    document
+        .getElementById("modal")
+        .style.display = "none";
+
+}
+
+
+/* EXPLORAR */
+function scrollToWorld(){
+
+    document
+        .getElementById("mundo")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* CERRAR AL HACER CLICK AFUERA */
+document
+    .getElementById("modal")
+    .addEventListener("click",function(e){
+
+        if(e.target === this){
+            closeGame();
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
